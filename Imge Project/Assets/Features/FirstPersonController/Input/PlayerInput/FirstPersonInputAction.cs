@@ -136,7 +136,7 @@ public partial class @FirstPersonInputAction : IInputActionCollection2, IDisposa
                     ""id"": ""f4a692e9-a75d-4872-babd-6741d2cece10"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
-                    ""processors"": ""DivideVector2ByDeltaTime"",
+                    ""processors"": ""DivideVector2ByDeltaTime,ScaleVector2(x=0.1,y=0.1)"",
                     ""groups"": ""Keyboard and Mouse"",
                     ""action"": ""Look"",
                     ""isComposite"": false,
