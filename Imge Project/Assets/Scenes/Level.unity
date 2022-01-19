@@ -560,6 +560,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 3022449736851839591, guid: 0b1475ecf3ab18c4ea8ac9be5440875b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022449736851839591, guid: 0b1475ecf3ab18c4ea8ac9be5440875b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3022449738145964870, guid: 0b1475ecf3ab18c4ea8ac9be5440875b, type: 3}
       propertyPath: player
       value: 
@@ -632,6 +640,14 @@ PrefabInstance:
       propertyPath: m_FontData.m_LineSpacing
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3022449738368910839, guid: 0b1475ecf3ab18c4ea8ac9be5440875b, type: 3}
+      propertyPath: _img
+      value: 
+      objectReference: {fileID: 21300000, guid: 7cbb929246eb1b640af3a4cab2d5822b, type: 3}
+    - target: {fileID: 3022449738368910839, guid: 0b1475ecf3ab18c4ea8ac9be5440875b, type: 3}
+      propertyPath: _targetImage
+      value: 
+      objectReference: {fileID: 681736997}
     - target: {fileID: 3022449738368910841, guid: 0b1475ecf3ab18c4ea8ac9be5440875b, type: 3}
       propertyPath: m_Type
       value: 0
@@ -684,6 +700,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &681736997 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3022449736851839590, guid: 0b1475ecf3ab18c4ea8ac9be5440875b, type: 3}
+  m_PrefabInstance: {fileID: 513581132}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &722238511 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7249798872100552211, guid: 1019d6947ac62f546967d2fd6d71ff1c, type: 3}

@@ -51,7 +51,12 @@ public class HologramPath : MonoBehaviour
     {
         distanceFromPlayer += moveSpeed * Time.deltaTime;
         if (distanceFromPlayer > maxDistanceFromPlayer)
+        {
             distanceFromPlayer = 0;
+            _trail.Stop();
+            _trail.transform.position = player.position;
+            _trail.Play();
+        }
 
 
         int i = 0;
@@ -72,5 +77,10 @@ public class HologramPath : MonoBehaviour
         }
 
         _trail.transform.position = from + (to - from).normalized * (distanceFromPlayer - distance) + Vector3.up * distanceFromGround;
+    }
+
+    public void SetActive(bool active_p)
+    {
+        this.SetActive(active_p);
     }
 }
