@@ -62,6 +62,15 @@ public partial class @FirstPersonInputAction : IInputActionCollection2, IDisposa
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""67d311c6-a450-4dab-8ec1-605421d2b4b7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -196,6 +205,28 @@ public partial class @FirstPersonInputAction : IInputActionCollection2, IDisposa
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7681c87a-3d42-4505-80aa-c7bdc74fb38c"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4db9e712-ae36-4da9-9948-01294b64ed55"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -236,6 +267,7 @@ public partial class @FirstPersonInputAction : IInputActionCollection2, IDisposa
         m_Char_Look = m_Char.FindAction("Look", throwIfNotFound: true);
         m_Char_Sprint = m_Char.FindAction("Sprint", throwIfNotFound: true);
         m_Char_Jump = m_Char.FindAction("Jump", throwIfNotFound: true);
+        m_Char_Pause = m_Char.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -299,6 +331,7 @@ public partial class @FirstPersonInputAction : IInputActionCollection2, IDisposa
     private readonly InputAction m_Char_Look;
     private readonly InputAction m_Char_Sprint;
     private readonly InputAction m_Char_Jump;
+    private readonly InputAction m_Char_Pause;
     public struct CharActions
     {
         private @FirstPersonInputAction m_Wrapper;
@@ -307,6 +340,7 @@ public partial class @FirstPersonInputAction : IInputActionCollection2, IDisposa
         public InputAction @Look => m_Wrapper.m_Char_Look;
         public InputAction @Sprint => m_Wrapper.m_Char_Sprint;
         public InputAction @Jump => m_Wrapper.m_Char_Jump;
+        public InputAction @Pause => m_Wrapper.m_Char_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Char; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -328,6 +362,9 @@ public partial class @FirstPersonInputAction : IInputActionCollection2, IDisposa
                 @Jump.started -= m_Wrapper.m_CharActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_CharActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_CharActionsCallbackInterface.OnJump;
+                @Pause.started -= m_Wrapper.m_CharActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_CharActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_CharActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_CharActionsCallbackInterface = instance;
             if (instance != null)
@@ -344,6 +381,9 @@ public partial class @FirstPersonInputAction : IInputActionCollection2, IDisposa
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -372,5 +412,6 @@ public partial class @FirstPersonInputAction : IInputActionCollection2, IDisposa
         void OnLook(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

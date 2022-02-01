@@ -21,6 +21,9 @@ public abstract class FirstPersonControllerInput : MonoBehaviour
     ///     Interaction type: Toggle.
     /// </summary>
     public abstract ReadOnlyReactiveProperty<bool> Run { get; }
+    
+    
+    public abstract ReadOnlyReactiveProperty<bool> Pause { get; }
 
     /// <summary>
     ///     Look axes following the free look (mouse look) pattern.

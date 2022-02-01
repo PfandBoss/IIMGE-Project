@@ -21,6 +21,8 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float maxViewAngle;
     [SerializeField] private float minViewAngle;
     [SerializeField] private float jumpSpeed;
+
+    [SerializeField]private GameObject _pauseMenu;
     
     private float stickToGroundForceMagnitude = 5.0f;
 
@@ -29,6 +31,7 @@ public class FirstPersonController : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _camera = GetComponentInChildren<Camera>();
         velocity = walkingSpeed;
+        
     }
 
     private void Start()
@@ -100,6 +103,14 @@ public class FirstPersonController : MonoBehaviour
             }
 
         });
+
+        firstPersonControllerInput.Pause.Subscribe(input =>
+        {
+            if (input)
+            {
+                _pauseMenu.GetComponent<PauseMenu>().EnterMenu();
+            }
+        }).AddTo(this);
 
     }
     

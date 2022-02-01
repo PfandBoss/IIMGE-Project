@@ -13,6 +13,7 @@ public class InputActionBasedFirstPersonControllerInput : FirstPersonControllerI
     private IObservable<Vector2> _move;
     private IObservable<Vector2> _look;
     private ReadOnlyReactiveProperty<bool> _sprint;
+    private ReadOnlyReactiveProperty<bool> _pause;
     private Subject<Unit> _jump;
 
 
@@ -35,6 +36,14 @@ public class InputActionBasedFirstPersonControllerInput : FirstPersonControllerI
     {
         get { return _look; }
     }
+    
+    public override ReadOnlyReactiveProperty<bool> Pause
+    {
+        get { return _pause; }
+    }
+
+    
+
 
     private void Awake()
     {
@@ -65,6 +74,9 @@ public class InputActionBasedFirstPersonControllerInput : FirstPersonControllerI
 
         _jump = new Subject<Unit>().AddTo(this);
         _firstPersonInputAction.Char.Jump.performed += _ => _jump.OnNext(Unit.Default);
+
+        _pause = this.UpdateAsObservable().Select(_ => _firstPersonInputAction.Char.Pause.ReadValueAsObject() != null)
+            .ToReadOnlyReactiveProperty();
 
     }
 
