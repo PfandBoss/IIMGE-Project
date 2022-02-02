@@ -13,12 +13,14 @@ public class PauseMenu : MonoBehaviour
 
     private CharacterController rb;
     private Quaternion currRot;
+    private Quaternion currCamRot;
 
     private void Start()
     {
         Debug.Log(_player.name);
         rb = _player.GetComponent<CharacterController>();
-        currRot = Camera.main.transform.rotation;
+        currRot = _player.transform.rotation;
+        currCamRot = Camera.main.transform.rotation;
     }
 
 
@@ -43,12 +45,14 @@ public class PauseMenu : MonoBehaviour
         
         if (!gameIsPaused)
         {
-            currRot = Camera.main.transform.rotation;
+            currRot = _player.transform.rotation;
+            currCamRot = Camera.main.transform.rotation;
         }
        
         if (gameIsPaused)
         {
-            Camera.main.transform.rotation = currRot;
+            _player.transform.rotation = currRot;
+            Camera.main.transform.rotation = currCamRot;
         }
     }
 
