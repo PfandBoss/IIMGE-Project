@@ -76,7 +76,7 @@ public class PauseMenu : MonoBehaviour
         gameIsPaused = true;
     }
 
-    public void QuitGame()
+    public void QuitToMainMenu()
     {
         pauseMenuUI.SetActive(false);
         rb.enabled = true;

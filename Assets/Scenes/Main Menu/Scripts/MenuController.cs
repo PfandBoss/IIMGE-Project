@@ -8,6 +8,7 @@ public class MenuController : MonoBehaviour
 {
     [Header("Levels To Load")]
     public string _StartGameLevel;
+    public string _OpenMainMenu;
 
     public void StartButton()
     {
@@ -16,5 +17,10 @@ public class MenuController : MonoBehaviour
 
     public void ExitButton(){
         Application.Quit();
+    }
+    
+    public void QuitMainMenuButton()
+    {
+        SceneManager.LoadScene(_OpenMainMenu);
     }
 }
