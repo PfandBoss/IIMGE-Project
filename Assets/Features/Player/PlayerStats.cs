@@ -19,7 +19,7 @@ public class PlayerStats : MonoBehaviour
 
     private void Start()
     {
-        health.Value -= 1;
+        //health.Value -= 1;
     }
 
     private void Update()
@@ -56,12 +56,14 @@ public class PlayerStats : MonoBehaviour
         if (armor.Value > 0)
         {
             armor.Value -= damage;
+            return;
         }
         else if (health.Value > 0)
         {
             health.Value -= damage;
-            PlayerDefeated();
+            return;
         }
+        PlayerDefeated();
     }
     public void UpdateHealthValue(int value)
     {
@@ -104,6 +106,8 @@ public class PlayerStats : MonoBehaviour
 
     public void PlayerDefeated()
     {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
         SceneManager.LoadScene("Game Over");
     }
 }
