@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 5349394051612353739}
   - component: {fileID: 5067334488601082174}
   - component: {fileID: 4277090248450959927}
+  - component: {fileID: 7165464493926012496}
   m_Layer: 0
   m_Name: FirstPersonPlayer
   m_TagString: Untagged
@@ -148,6 +149,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstPersonControllerInput: {fileID: 4277090248450959927}
+  walkingSpeed: 0
+  sprintingSpeed: 0
+  maxViewAngle: 0
+  minViewAngle: 0
+  jumpSpeed: 0
+  _pauseMenu: {fileID: 0}
 --- !u!114 &4277090248450959927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +165,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 090f897c207f96b40a9664db4a524003, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7165464493926012496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4374804948076272335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8f6ec7d15615284da33531baa3a51a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6014803277231219246

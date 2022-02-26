@@ -6,25 +6,36 @@ using UnityEngine;
 public class Items : MonoBehaviour
 {
     public Item_Type type;
-    public GameObject Player;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.Equals(Player))
+        if (other.gameObject.tag.Equals("Player"))
         {
+            PlayerStats stats = other.GetComponent<PlayerStats>();
             switch (type)
-            {
-                case Item_Type.DmgUP: 
-                    Player.GetComponent<PlayerStats>().UpdateArmorCnt(1);
+            {  
+                case Item_Type.DmgUP:
+                    if (stats.getDmgUp() < 3)
+                    {
+                        stats.UpdateDmgUpValue(1);
+                        Destroy(gameObject);
+                    }
                     break;
                 case Item_Type.SpeedUP:
-                    Player.GetComponent<PlayerStats>().UpdateSpeedUpValue(1);
+                    if (stats.getSpeedUp() < 3)
+                    {
+                        stats.UpdateSpeedUpValue(1);
+                        Destroy(gameObject);
+                    }
                     break;
                 case Item_Type.ArmorUP:
-                    Player.GetComponent<PlayerStats>().UpdateArmorCnt(1);
+                    if (stats.getArmor().Value < 3)
+                    {
+                        stats.UpdateArmorCnt(1);
+                        Destroy(gameObject);
+                    }
                     break;
             }
-            Destroy(this);
         }
     }
 }

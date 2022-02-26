@@ -38,7 +38,7 @@ public class RandomSpawner : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             Vector3 randomPos = Random.insideUnitSphere * Radius;
-            randomPos = new Vector3 (playerPos.x + randomPos.x, playerPos.y, playerPos.z + randomPos.z);
+            randomPos = new Vector3 (playerPos.x + randomPos.x, playerPos.y + 20, playerPos.z + randomPos.z);
             Instantiate(items[Random.Range(0, itemMax)], randomPos, Quaternion.identity);
         }
     }
