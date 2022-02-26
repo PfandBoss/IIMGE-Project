@@ -7,10 +7,9 @@ public class EnemyAI : MonoBehaviour
     public Transform[] waypoints;
     private int _currentWaypointIndex;
 
-    private const float Speed = 2f;
     private const float SightRange = 15;
     private const float AttackRange = 4;
-    private bool isAttacking = false;
+    private bool isAttacking;
 
     //NavMesh Stuff
     public GameObject player;
@@ -72,14 +71,12 @@ public class EnemyAI : MonoBehaviour
 
     private IEnumerator Attack()
     {
-        Debug.Log("Im attacking");
         isAttacking = true;
         _agent.isStopped = true;
         yield return new WaitForSeconds(2);
         if (Vector3.Distance(transform.position, player.transform.position) <= AttackRange)
         {
             _playerStats.ApplyDamage(1);
-            Debug.Log(_playerStats.getHealth());
         }
         isAttacking = false;
         _agent.isStopped = false;
