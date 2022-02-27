@@ -23,7 +23,6 @@ public class EnemyAI : MonoBehaviour
     {
         _agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         _playerStats = player.GetComponent<PlayerStats>();
-        _playerStats.ApplyDamage(1);
     }
 
     private void Update()
