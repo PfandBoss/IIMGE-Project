@@ -2654,6 +2654,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 228861034}
     - target: {fileID: 1368649739857779304, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
+      propertyPath: SightRange
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368649739857779304, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
+      propertyPath: AttackRange
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368649739857779304, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 436214844}
@@ -4560,6 +4568,10 @@ PrefabInstance:
       propertyPath: _pauseMenu
       value: 
       objectReference: {fileID: 1532486011}
+    - target: {fileID: 7165464493926012496, guid: f6af6b8647f7e274f8f5f015a1d0fd9d, type: 3}
+      propertyPath: health.value
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6af6b8647f7e274f8f5f015a1d0fd9d, type: 3}
 --- !u!1 &2132930157

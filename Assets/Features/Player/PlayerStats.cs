@@ -8,9 +8,13 @@ using UnityEngine.SceneManagement;
 public class PlayerStats : MonoBehaviour
 {
     [SerializeField]
-    private ReactiveProperty<int> health = new ReactiveProperty<int>(100);
+    private ReactiveProperty<int> health = new ReactiveProperty<int>(4);
+
+    private int hiddenHealth = 100;
     [SerializeField]
     private ReactiveProperty<int> armor = new ReactiveProperty<int>(0);
+
+    private int hiddenArmor = 0;
     [SerializeField]
     private ReactiveProperty<int> speedUp = new ReactiveProperty<int>(0);
     [SerializeField]
@@ -54,15 +58,19 @@ public class PlayerStats : MonoBehaviour
     {
         if (armor.Value > 0)
         {
-            armor.Value -= damage;
+            hiddenArmor -= damage;
+            armor.Value = Mathf.CeilToInt(hiddenArmor / 25.0f);
             return;
         }
-        if (health.Value > 1)
+        if (hiddenHealth > 1)
         {
-            health.Value -= damage;
+            hiddenHealth -= damage;
+            health.Value = Mathf.CeilToInt(hiddenHealth / 25.0f);
+            Debug.Log("health.Value: "+health.Value+ " hiddenHealth: "+hiddenHealth);
             return;
         }
-        health.Value -= damage;
+        hiddenHealth -= damage;
+        health.Value = Mathf.CeilToInt(hiddenHealth / 25.0f);
         PlayerDefeated();
     }
 
@@ -108,7 +116,8 @@ public class PlayerStats : MonoBehaviour
     
     public void UpdateArmorCnt(int value)
     {
-        armor.Value += value;
+        hiddenArmor += value;
+        armor.Value += 1;
     }
     
     public ReactiveProperty<int> getArmor()

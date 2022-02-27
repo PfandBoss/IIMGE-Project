@@ -16,8 +16,8 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private Text speedMulText;
     private void Awake()
     {
-        stats.getHealth().Subscribe(i => UpdateUI(i, healthCanvas)).AddTo(this);
         stats.getArmor().Subscribe(i => ArmorUI(i)).AddTo(this);
+        stats.getHealth().Subscribe(i => UpdateUI(i, healthCanvas)).AddTo(this);
         stats.getDmgUp().Subscribe(i => UpdateUI(i, dmgCanvas)).AddTo(this);
         stats.getSpeedUp().Subscribe(i => UpdateUI(i, speedCanvas)).AddTo(this);
         stats.getSpeedMultiplier().Subscribe(f => UpdateMultipliers(f, speedMulText));
@@ -32,29 +32,13 @@ public class UIHandler : MonoBehaviour
         }
         canvas[value].gameObject.SetActive(true);
     }
-    
-    private void HealthUI(int value)
-    {
-        value = Mathf.RoundToInt(value / 4.0f);
-        for (var i = 0; i < armorCanvas.Length; i++)
-        {
-            armorCanvas[i].gameObject.SetActive(false);
-        }
 
-        if (value != 0)
-        {
-            armorCanvas[value - 1].gameObject.SetActive(true);
-        }
-    }
-    
     private void ArmorUI(int value)
     {
-        value /= 3;
         for (var i = 0; i < armorCanvas.Length; i++)
         {
             armorCanvas[i].gameObject.SetActive(false);
         }
-
         if (value != 0)
         {
             armorCanvas[value - 1].gameObject.SetActive(true);
