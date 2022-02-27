@@ -142,6 +142,7 @@ public class FighterController : MonoBehaviour
             raycastHit.collider.gameObject.SendMessage("ApplyDamage", fighterStats.baseDamage * comboHit, SendMessageOptions.DontRequireReceiver);
         }
 
+
         elapsedTime = 0;
 
         while (elapsedTime < punchTime / 2)
@@ -155,4 +156,6 @@ public class FighterController : MonoBehaviour
         hand.handObj.transform.position = hand.initialPos.transform.position;
         yield return null;
     }
+
+    
 }
