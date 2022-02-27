@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
@@ -9,7 +10,7 @@ public class EnemyAI : MonoBehaviour
 
     private const float SightRange = 15;
     private const float AttackRange = 4;
-    private int health = 50;
+    private int health = 5;
     private bool isAttacking;
 
     //NavMesh Stuff
@@ -83,12 +84,12 @@ public class EnemyAI : MonoBehaviour
         _agent.isStopped = false;
     }
 
-    public void damageEnemy(int dmg)
+    public void ApplyDamage(int dmg)
     {
         health -= dmg;
-        if (health == 0)
+        if (health <= 0)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 }
