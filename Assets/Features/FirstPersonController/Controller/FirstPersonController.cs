@@ -33,6 +33,7 @@ public class FirstPersonController : MonoBehaviour
         velocity = walkingSpeed;
         
     }
+    
 
     private void Start()
     {
@@ -40,7 +41,7 @@ public class FirstPersonController : MonoBehaviour
         
         var jumpLatch = LatchObservables.Latch(this.UpdateAsObservable(), firstPersonControllerInput.Jump, false);
         
-        firstPersonControllerInput.Move.Zip(jumpLatch,(mo,ju) => new MoveInputData(mo,ju) ).Where(inputData => inputData.move  != Vector2.zero|| inputData.jump ).Subscribe(input =>
+        firstPersonControllerInput.Move.Zip(jumpLatch,(mo,ju) => new MoveInputData(mo,ju) ).Subscribe(input =>
         {
             var wasGrounded = _characterController.isGrounded;
             var verticalVelocity = 0f;
