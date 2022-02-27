@@ -28,6 +28,7 @@ public class FighterController : MonoBehaviour
 
     private CoroutineQueue coroutineQueue;
     private Queue<AttackType> ComboQ = new Queue<AttackType>();
+
     private enum AttackType
     {
         Left,
@@ -41,6 +42,9 @@ public class FighterController : MonoBehaviour
         coroutineQueue = new CoroutineQueue(this);
         coroutineQueue.StartLoop();
 
+        if (gameObject.layer != LayerMask.NameToLayer("Player")) 
+            return;
+        
         var leftLatch = LatchObservables.Latch(this.UpdateAsObservable(), firstPersonControllerInput.LeftPunch, false)
             .Where(data => data)
             .Select(input => AttackType.Left);
@@ -137,11 +141,12 @@ public class FighterController : MonoBehaviour
         yield return new WaitForSeconds(punchTime / 2);
 
         RaycastHit raycastHit;   
-        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out raycastHit, 2f))
+        if(Physics.Raycast(transform.position, transform.forward * 2.5f, out raycastHit, 2f))
         {
             raycastHit.collider.gameObject.SendMessage("ApplyDamage", fighterStats.baseDamage * comboHit, SendMessageOptions.DontRequireReceiver);
         }
 
+        //Debug.DrawLine(transform.position, transform.TransformDirection(Vector3.forward), Color.red, 2);
 
         elapsedTime = 0;
 
