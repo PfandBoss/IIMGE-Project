@@ -7,25 +7,24 @@ using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
+    [SerializeField]
     private ReactiveProperty<int> health = new ReactiveProperty<int>(4);
+    [SerializeField]
     private ReactiveProperty<int> armor = new ReactiveProperty<int>(0);
-    public int speedUp; //TODO: Change to subject and subscribe Item Trigger to it
-    public int dmgUp; //TODO: Let UI Subscribe to subject and update itself when changed
+    [SerializeField]
+    private ReactiveProperty<int> speedUp = new ReactiveProperty<int>(0);
+    [SerializeField]
+    private ReactiveProperty<int> dmgUp = new ReactiveProperty<int>(0);
     
     private ReactiveProperty<float> damageMultiplier = new ReactiveProperty<float>(1);
     private ReactiveProperty<float> speedMultiplier = new ReactiveProperty<float>(1);
     
     private bool coroutineStarted;
 
-    private void Start()
-    {
-        //health.Value -= 1;
-    }
-
     private void Update()
     {
         //TODO: Implement speed in Player Movement and dmg multiplier in Fighting-System
-        if (!coroutineStarted && (dmgUp > 0 || speedUp > 0) && MicrophoneInput.MicrophoneLoudness > 0.3)
+        if (!coroutineStarted && (dmgUp.Value > 0 || speedUp.Value > 0) && MicrophoneInput.MicrophoneLoudness > 0.3)
         {
             Debug.Log(MicrophoneInput.MicrophoneLoudness);
             coroutineStarted = true;
@@ -38,14 +37,14 @@ public class PlayerStats : MonoBehaviour
     {
         Debug.Log("dmg before use: " + damageMultiplier.Value);
         Debug.Log("speed before use: " + speedMultiplier.Value);
-        damageMultiplier.Value += dmgUp;
-        speedMultiplier.Value += speedUp;
-        speedUp = 0;
-        dmgUp = 0;
+        damageMultiplier.Value += dmgUp.Value * 0.5f;
+        speedMultiplier.Value += speedUp.Value * 0.5f;
+        speedUp.Value = 0;
+        dmgUp.Value = 0;
         Debug.Log("dmg after use: " + damageMultiplier.Value);
         Debug.Log("speed after use: " + speedMultiplier.Value);
-        
-        yield return new WaitForSeconds(20);
+
+        yield return new WaitForSeconds(5);
         damageMultiplier.Value = 1;
         speedMultiplier.Value = 1;
         coroutineStarted = false;
@@ -58,13 +57,25 @@ public class PlayerStats : MonoBehaviour
             armor.Value -= damage;
             return;
         }
-        else if (health.Value > 0)
+        if (health.Value > 1)
         {
             health.Value -= damage;
             return;
         }
+        health.Value -= damage;
         PlayerDefeated();
     }
+
+    public ReactiveProperty<float> getDamageMultiplier()
+    {
+        return damageMultiplier;
+    }
+    
+    public ReactiveProperty<float> getSpeedMultiplier()
+    {
+        return speedMultiplier;
+    }
+    
     public void UpdateHealthValue(int value)
     {
         health.Value += value;
@@ -74,22 +85,23 @@ public class PlayerStats : MonoBehaviour
     {
         return health;
     }
+    
     public void UpdateSpeedUpValue(int value)
     {
-        speedUp += value;
+        speedUp.Value += value;
     }
 
-    public int getSpeedUp()
+    public ReactiveProperty<int> getSpeedUp()
     {
         return speedUp;
     }
 
     public void UpdateDmgUpValue(int value)
     {
-        dmgUp += value;
+        dmgUp.Value += value;
     }
     
-    public int getDmgUp()
+    public ReactiveProperty<int> getDmgUp()
     {
         return dmgUp;
     }
