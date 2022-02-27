@@ -30,4 +30,16 @@ public abstract class FirstPersonControllerInput : MonoBehaviour
     ///     Interaction type: continuous axes.
     /// </summary>
     public abstract IObservable<Vector2> Look { get; }
+
+    /// <summary>
+    ///     Left Punch button.
+    ///     Interaction type: Trigger.
+    /// </summary>
+    public abstract IObservable<Unit> LeftPunch { get; }
+
+    /// <summary>
+    ///     Right Punch button.
+    ///     Interaction type: Trigger.
+    /// </summary>
+    public abstract IObservable<Unit> RightPunch { get; }
 }
