@@ -12,7 +12,9 @@ public class FighterController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private FirstPersonControllerInput firstPersonControllerInput;
-    [SerializeField] private FighterStats fighterStats;
+    [SerializeField] private FightingStats fightingStats;
+    [SerializeField] private PlayerStats _playerStats;
+    
  
     [System.Serializable]
     private class Hand
@@ -81,13 +83,13 @@ public class FighterController : MonoBehaviour
 
                 if (input is AttackType.Left)
                 {
-                    coroutineQueue.EnqueueAction(Punch(AttackType.Left, fighterStats.punchSpeed));
-                    coroutineQueue.EnqueueWait(fighterStats.punchSpeed);
+                    coroutineQueue.EnqueueAction(Punch(AttackType.Left, fightingStats.punchSpeed));
+                    coroutineQueue.EnqueueWait(fightingStats.punchSpeed);
                 }
                 else if (input is AttackType.Right)
                 {
-                    coroutineQueue.EnqueueAction(Punch(AttackType.Right, fighterStats.punchSpeed));
-                    coroutineQueue.EnqueueWait(fighterStats.punchSpeed);
+                    coroutineQueue.EnqueueAction(Punch(AttackType.Right, fightingStats.punchSpeed));
+                    coroutineQueue.EnqueueWait(fightingStats.punchSpeed);
                 }
             });
     }
@@ -113,12 +115,12 @@ public class FighterController : MonoBehaviour
         if (ComboQ.Count == 0 || coroutineQueue.Count > 0)
             return;
 
-        comboCooldown = fighterStats.comboCooldown;
+        comboCooldown = fightingStats.comboCooldown;
 
         foreach (var q in ComboQ)
         {
-            coroutineQueue.EnqueueAction(Punch(q, fighterStats.punchSpeed / (ComboQ.Count), ComboQ.ToList().IndexOf(q) + 1));
-            coroutineQueue.EnqueueWait(fighterStats.punchSpeed / (ComboQ.Count));
+            coroutineQueue.EnqueueAction(Punch(q, fightingStats.punchSpeed / (ComboQ.Count), ComboQ.ToList().IndexOf(q) + 1));
+            coroutineQueue.EnqueueWait(fightingStats.punchSpeed / (ComboQ.Count));
         }
 
         ComboQ.Clear();
@@ -142,9 +144,19 @@ public class FighterController : MonoBehaviour
         yield return new WaitForSeconds(punchTime / 2);
 
         RaycastHit raycastHit;   
-        if(Physics.Raycast(transform.position, transform.forward * 2.5f, out raycastHit, 2f))
+        if(Physics.Raycast(transform.position, transform.forward * 2.5f, out raycastHit, 4f))
         {
-            raycastHit.collider.gameObject.SendMessage("ApplyDamage", fighterStats.baseDamage * comboHit, SendMessageOptions.DontRequireReceiver);
+            float dmgMul = 1;
+            if (gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                dmgMul = _playerStats.getDamageMultiplier().Value;
+            }
+            raycastHit
+                .collider
+                .gameObject
+                .SendMessage("ApplyDamage", 
+                    fightingStats.baseDamage * comboHit * dmgMul, 
+                    SendMessageOptions.DontRequireReceiver);
         }
 
         //Debug.DrawLine(transform.position, transform.TransformDirection(Vector3.forward), Color.red, 2);
@@ -165,8 +177,16 @@ public class FighterController : MonoBehaviour
 
     public void AIPunch()
     {
-        var attackType = Random.Range(0, 1);
-        coroutineQueue.EnqueueAction(Punch((AttackType)attackType, fighterStats.punchSpeed));
-        coroutineQueue.EnqueueWait(fighterStats.punchSpeed);
+        var attackType = Random.Range(0, 2);
+        coroutineQueue.EnqueueAction(Punch((AttackType)attackType, fightingStats.punchSpeed));
+        coroutineQueue.EnqueueWait(fightingStats.punchSpeed);
+    }
+
+    public void AICombo()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            ComboQ.Enqueue(AttackType.Left);
+        }
     }
 }

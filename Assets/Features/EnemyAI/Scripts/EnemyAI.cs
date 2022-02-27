@@ -6,11 +6,11 @@ public class EnemyAI : MonoBehaviour
     public Transform[] waypoints;
     private int _currentWaypointIndex;
 
-    private const float SightRange = 15;
-    private const float AttackRange = 4;
+    [SerializeField]private  float SightRange ;
+    [SerializeField]private  float AttackRange;
     private bool isAttacking;
     [SerializeField]
-    private int health = 50;
+    private int health;
    
 
     //NavMesh Stuff
@@ -75,11 +75,10 @@ public class EnemyAI : MonoBehaviour
     {
         isAttacking = true;
         _agent.isStopped = true;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1f);
         if (Vector3.Distance(transform.position, player.transform.position) <= AttackRange)
         {
-            Debug.Log("punch");
-            _fighterController.AIPunch();
+            _fighterController.AICombo();
         }
         isAttacking = false;
         _agent.isStopped = false;

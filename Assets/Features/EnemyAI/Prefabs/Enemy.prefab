@@ -118,7 +118,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  health: 50
   player: {fileID: 0}
+  _fighterController: {fileID: 3984040548498097830}
 --- !u!195 &769515345
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -156,17 +158,17 @@ MonoBehaviour:
   firstPersonControllerInput: {fileID: 0}
   fighterStats: {fileID: 11400000, guid: 9c4c69d93a2d2d84a975e1284dc46a76, type: 2}
   rightHand:
-    handObj: {fileID: 0}
-    baseColor: {r: 0, g: 0, b: 0, a: 0}
-    rechargeColor: {r: 0, g: 0, b: 0, a: 0}
-    initialPos: {fileID: 0}
-    gotoPos: {fileID: 0}
+    handObj: {fileID: 4268795702874716763}
+    baseColor: {r: 1, g: 1, b: 1, a: 0}
+    rechargeColor: {r: 1, g: 1, b: 1, a: 0}
+    initialPos: {fileID: 8711019427697619691}
+    gotoPos: {fileID: 7423126568384527977}
   leftHand:
-    handObj: {fileID: 0}
-    baseColor: {r: 0, g: 0, b: 0, a: 0}
-    rechargeColor: {r: 0, g: 0, b: 0, a: 0}
-    initialPos: {fileID: 0}
-    gotoPos: {fileID: 0}
+    handObj: {fileID: 8683950891376190500}
+    baseColor: {r: 1, g: 1, b: 1, a: 0}
+    rechargeColor: {r: 1, g: 1, b: 1, a: 0}
+    initialPos: {fileID: 2465793433031632576}
+    gotoPos: {fileID: 7552338673513289405}
 --- !u!1 &2465793433031632576
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +292,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a5c4a08bbd4af3842a782f1b83cb7675, type: 2}
+  - {fileID: 2100000, guid: f14a4be020ff3c447b0bcacb11d9c460, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -478,7 +480,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a5c4a08bbd4af3842a782f1b83cb7675, type: 2}
+  - {fileID: 2100000, guid: f14a4be020ff3c447b0bcacb11d9c460, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

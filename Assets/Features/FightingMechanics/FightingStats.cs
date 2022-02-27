@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "FighterStats", menuName = "ScriptableObjects/Fighting", order = 1)]
-public class FighterStats : ScriptableObject
+public class FightingStats : ScriptableObject
 {
     public float punchSpeed;
     public int baseDamage;
