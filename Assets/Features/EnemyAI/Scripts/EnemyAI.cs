@@ -9,6 +9,7 @@ public class EnemyAI : MonoBehaviour
 
     private const float SightRange = 15;
     private const float AttackRange = 4;
+    private int health = 50;
     private bool isAttacking;
 
     //NavMesh Stuff
@@ -80,5 +81,14 @@ public class EnemyAI : MonoBehaviour
         }
         isAttacking = false;
         _agent.isStopped = false;
+    }
+
+    public void damageEnemy(int dmg)
+    {
+        health -= dmg;
+        if (health == 0)
+        {
+            Destroy(this);
+        }
     }
 }
