@@ -78,7 +78,7 @@ public class EnemyAI : MonoBehaviour
         yield return new WaitForSeconds(1f);
         if (Vector3.Distance(transform.position, player.transform.position) <= AttackRange)
         {
-            _fighterController.AICombo();
+            _fighterController.AIPunch();
         }
         isAttacking = false;
         _agent.isStopped = false;
