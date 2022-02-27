@@ -2717,6 +2717,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 1368649739857779317, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465793433031632576, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3355930300700949045, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984040548498097830, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
+      propertyPath: fightingStats
+      value: 
+      objectReference: {fileID: 11400000, guid: 9c4c69d93a2d2d84a975e1284dc46a76, type: 2}
+    - target: {fileID: 4268795702874716763, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423126568384527977, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7552338673513289405, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8657972318518541300, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683950891376190500, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711019427697619691, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
 --- !u!4 &1162108906 stripped
