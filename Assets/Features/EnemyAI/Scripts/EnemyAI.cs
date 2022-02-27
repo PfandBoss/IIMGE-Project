@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Security.Cryptography;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -10,20 +8,22 @@ public class EnemyAI : MonoBehaviour
 
     private const float SightRange = 15;
     private const float AttackRange = 4;
-    private int health = 5;
     private bool isAttacking;
+    [SerializeField]
+    private int health = 50;
+   
 
     //NavMesh Stuff
     public GameObject player;
     private PlayerStats _playerStats;
     private UnityEngine.AI.NavMeshAgent _agent;
+    [SerializeField] private FighterController _fighterController;
 
 
     private void Start()
     {
         _agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         _playerStats = player.GetComponent<PlayerStats>();
-        _playerStats.ApplyDamage(1);
     }
 
     private void Update()
@@ -78,7 +78,8 @@ public class EnemyAI : MonoBehaviour
         yield return new WaitForSeconds(2);
         if (Vector3.Distance(transform.position, player.transform.position) <= AttackRange)
         {
-            _playerStats.ApplyDamage(1);
+            Debug.Log("punch");
+            _fighterController.AIPunch();
         }
         isAttacking = false;
         _agent.isStopped = false;

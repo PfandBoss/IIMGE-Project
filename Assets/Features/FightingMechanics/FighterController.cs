@@ -5,6 +5,7 @@ using System.Linq;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 public class FighterController : MonoBehaviour
@@ -162,5 +163,10 @@ public class FighterController : MonoBehaviour
         yield return null;
     }
 
-    
+    public void AIPunch()
+    {
+        var attackType = Random.Range(0, 1);
+        coroutineQueue.EnqueueAction(Punch((AttackType)attackType, fighterStats.punchSpeed));
+        coroutineQueue.EnqueueWait(fighterStats.punchSpeed);
+    }
 }
