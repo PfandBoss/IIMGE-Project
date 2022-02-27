@@ -15,6 +15,8 @@ public class InputActionBasedFirstPersonControllerInput : FirstPersonControllerI
     private ReadOnlyReactiveProperty<bool> _sprint;
     private ReadOnlyReactiveProperty<bool> _pause;
     private Subject<Unit> _jump;
+    private Subject<Unit> _leftPunch;
+    private Subject<Unit> _rightPunch;
 
 
 
@@ -36,13 +38,23 @@ public class InputActionBasedFirstPersonControllerInput : FirstPersonControllerI
     {
         get { return _look; }
     }
-    
+
     public override ReadOnlyReactiveProperty<bool> Pause
     {
         get { return _pause; }
     }
 
-    
+    public override IObservable<Unit> LeftPunch
+    {
+        get { return _leftPunch; }
+    }
+
+    public override IObservable<Unit> RightPunch
+    {
+        get { return _rightPunch; }
+    }
+
+
 
 
     private void Awake()
@@ -50,7 +62,7 @@ public class InputActionBasedFirstPersonControllerInput : FirstPersonControllerI
         _firstPersonInputAction = new FirstPersonInputAction();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        
+
         _move = this.UpdateAsObservable()
             .Select(_ => _firstPersonInputAction.Char.Move.ReadValue<Vector2>());
 
@@ -69,7 +81,7 @@ public class InputActionBasedFirstPersonControllerInput : FirstPersonControllerI
             });
 
 
-        _sprint = this.UpdateAsObservable().Select(_=> _firstPersonInputAction.Char.Sprint.ReadValueAsObject() != null).ToReadOnlyReactiveProperty();
+        _sprint = this.UpdateAsObservable().Select(_ => _firstPersonInputAction.Char.Sprint.ReadValueAsObject() != null).ToReadOnlyReactiveProperty();
 
 
         _jump = new Subject<Unit>().AddTo(this);
@@ -78,6 +90,11 @@ public class InputActionBasedFirstPersonControllerInput : FirstPersonControllerI
         _pause = this.UpdateAsObservable().Select(_ => _firstPersonInputAction.Char.Pause.ReadValueAsObject() != null)
             .ToReadOnlyReactiveProperty();
 
+        _leftPunch = new Subject<Unit>().AddTo(this);
+        _firstPersonInputAction.Char.LeftPunch.performed += _ => _leftPunch.OnNext(Unit.Default);
+
+        _rightPunch = new Subject<Unit>().AddTo(this);
+        _firstPersonInputAction.Char.RightPunch.performed += _ => _rightPunch.OnNext(Unit.Default);
     }
 
     private void OnEnable()
@@ -89,6 +106,6 @@ public class InputActionBasedFirstPersonControllerInput : FirstPersonControllerI
     {
         _firstPersonInputAction.Disable();
     }
-    
-    
+
+
 }

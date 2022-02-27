@@ -71,6 +71,24 @@ public partial class @FirstPersonInputAction : IInputActionCollection2, IDisposa
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftPunch"",
+                    ""type"": ""Button"",
+                    ""id"": ""84ffba20-e2f5-428d-b5f3-5ee97c432d4a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightPunch"",
+                    ""type"": ""Button"",
+                    ""id"": ""d7923325-3b80-45a7-9511-9cecfd94077a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -227,6 +245,50 @@ public partial class @FirstPersonInputAction : IInputActionCollection2, IDisposa
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""88748218-5074-4f1b-867f-580cace3ab33"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""LeftPunch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bd8139bf-5ee8-4ac8-874c-53569579a056"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""LeftPunch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0ff7d4e2-5a44-4005-8043-a303ea57f4d9"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""RightPunch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0afd9a75-b76b-4c9f-a70a-222fed3e527d"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""RightPunch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -268,6 +330,8 @@ public partial class @FirstPersonInputAction : IInputActionCollection2, IDisposa
         m_Char_Sprint = m_Char.FindAction("Sprint", throwIfNotFound: true);
         m_Char_Jump = m_Char.FindAction("Jump", throwIfNotFound: true);
         m_Char_Pause = m_Char.FindAction("Pause", throwIfNotFound: true);
+        m_Char_LeftPunch = m_Char.FindAction("LeftPunch", throwIfNotFound: true);
+        m_Char_RightPunch = m_Char.FindAction("RightPunch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -332,6 +396,8 @@ public partial class @FirstPersonInputAction : IInputActionCollection2, IDisposa
     private readonly InputAction m_Char_Sprint;
     private readonly InputAction m_Char_Jump;
     private readonly InputAction m_Char_Pause;
+    private readonly InputAction m_Char_LeftPunch;
+    private readonly InputAction m_Char_RightPunch;
     public struct CharActions
     {
         private @FirstPersonInputAction m_Wrapper;
@@ -341,6 +407,8 @@ public partial class @FirstPersonInputAction : IInputActionCollection2, IDisposa
         public InputAction @Sprint => m_Wrapper.m_Char_Sprint;
         public InputAction @Jump => m_Wrapper.m_Char_Jump;
         public InputAction @Pause => m_Wrapper.m_Char_Pause;
+        public InputAction @LeftPunch => m_Wrapper.m_Char_LeftPunch;
+        public InputAction @RightPunch => m_Wrapper.m_Char_RightPunch;
         public InputActionMap Get() { return m_Wrapper.m_Char; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -365,6 +433,12 @@ public partial class @FirstPersonInputAction : IInputActionCollection2, IDisposa
                 @Pause.started -= m_Wrapper.m_CharActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_CharActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_CharActionsCallbackInterface.OnPause;
+                @LeftPunch.started -= m_Wrapper.m_CharActionsCallbackInterface.OnLeftPunch;
+                @LeftPunch.performed -= m_Wrapper.m_CharActionsCallbackInterface.OnLeftPunch;
+                @LeftPunch.canceled -= m_Wrapper.m_CharActionsCallbackInterface.OnLeftPunch;
+                @RightPunch.started -= m_Wrapper.m_CharActionsCallbackInterface.OnRightPunch;
+                @RightPunch.performed -= m_Wrapper.m_CharActionsCallbackInterface.OnRightPunch;
+                @RightPunch.canceled -= m_Wrapper.m_CharActionsCallbackInterface.OnRightPunch;
             }
             m_Wrapper.m_CharActionsCallbackInterface = instance;
             if (instance != null)
@@ -384,6 +458,12 @@ public partial class @FirstPersonInputAction : IInputActionCollection2, IDisposa
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @LeftPunch.started += instance.OnLeftPunch;
+                @LeftPunch.performed += instance.OnLeftPunch;
+                @LeftPunch.canceled += instance.OnLeftPunch;
+                @RightPunch.started += instance.OnRightPunch;
+                @RightPunch.performed += instance.OnRightPunch;
+                @RightPunch.canceled += instance.OnRightPunch;
             }
         }
     }
@@ -413,5 +493,7 @@ public partial class @FirstPersonInputAction : IInputActionCollection2, IDisposa
         void OnSprint(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnLeftPunch(InputAction.CallbackContext context);
+        void OnRightPunch(InputAction.CallbackContext context);
     }
 }
