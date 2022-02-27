@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class PlayerStats : MonoBehaviour
 {
     [SerializeField]
-    private ReactiveProperty<int> health = new ReactiveProperty<int>(4);
+    private ReactiveProperty<int> health = new ReactiveProperty<int>(100);
     [SerializeField]
     private ReactiveProperty<int> armor = new ReactiveProperty<int>(0);
     [SerializeField]

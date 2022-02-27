@@ -33,8 +33,23 @@ public class UIHandler : MonoBehaviour
         canvas[value].gameObject.SetActive(true);
     }
     
+    private void HealthUI(int value)
+    {
+        value = Mathf.RoundToInt(value / 4.0f);
+        for (var i = 0; i < armorCanvas.Length; i++)
+        {
+            armorCanvas[i].gameObject.SetActive(false);
+        }
+
+        if (value != 0)
+        {
+            armorCanvas[value - 1].gameObject.SetActive(true);
+        }
+    }
+    
     private void ArmorUI(int value)
     {
+        value /= 3;
         for (var i = 0; i < armorCanvas.Length; i++)
         {
             armorCanvas[i].gameObject.SetActive(false);

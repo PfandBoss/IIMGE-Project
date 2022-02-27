@@ -45,7 +45,7 @@ public class Items : MonoBehaviour
                 case Item_Type.ArmorUP:
                     if (stats.getArmor().Value < 3)
                     {
-                        stats.UpdateArmorCnt(1);
+                        stats.UpdateArmorCnt(25);
                         Destroy(gameObject.transform.parent.gameObject);
                         Destroy(gameObject);
                     }
