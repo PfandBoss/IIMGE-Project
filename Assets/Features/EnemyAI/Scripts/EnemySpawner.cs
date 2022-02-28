@@ -53,5 +53,9 @@ public class EnemySpawner : MonoBehaviour
         
         //Win Screen here
     }
-    
+
+    public void DisableHolo()
+    {
+        hologramPath.gameObject.SetActive(false);
+    }
 }

@@ -8,6 +8,7 @@ public class EnemyAI : MonoBehaviour
     public Transform[] waypoints;
     private int _currentWaypointIndex;
     public HealthBar HealthBar;
+    public HologramPath holo;
 
     [SerializeField]private  float SightRange ;
     [SerializeField]private  float AttackRange;
@@ -35,12 +36,14 @@ public class EnemyAI : MonoBehaviour
     {
         if (isAttacking)
         {
-            transform.LookAt(player.transform.position);
+            //transform.LookAt(player.transform.position);
             return;
         }
         var distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         if (distanceToPlayer <= SightRange)
         {
+            if (gameObject.tag == "Boss")
+                player.SendMessage("DisableHolo", SendMessageOptions.DontRequireReceiver);
             if (distanceToPlayer <= AttackRange)
             {
                 StopAllCoroutines();
@@ -106,7 +109,7 @@ public class EnemyAI : MonoBehaviour
         isAttacking = true;
         _agent.isStopped = true;
         if (gameObject.tag == "Boss")
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(1.5f);
         else
             yield return new WaitForSeconds(0.25f);
         if (Vector3.Distance(transform.position, player.transform.position) <= AttackRange)
