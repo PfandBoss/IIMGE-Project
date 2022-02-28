@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 287656818}
   - component: {fileID: 287656817}
   m_Layer: 5
-  m_Name: Start Game
+  m_Name: Try Again
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -814,7 +814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 287656815}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1274023668
