@@ -23,6 +23,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float jumpSpeed;
 
     [SerializeField]private GameObject _pauseMenu;
+    [SerializeField] private PlayerStats stats;
     
     private float stickToGroundForceMagnitude = 5.0f;
 
@@ -31,12 +32,12 @@ public class FirstPersonController : MonoBehaviour
         _characterController = GetComponent<CharacterController>();
         _camera = GetComponentInChildren<Camera>();
         velocity = walkingSpeed;
-        
     }
-    
 
     private void Start()
     {
+        stats.getSpeedMultiplier().Subscribe(f => changeSpeed(f)).AddTo(this);
+        
         _characterController.Move(-stickToGroundForceMagnitude * transform.up);
         
         var jumpLatch = LatchObservables.Latch(this.UpdateAsObservable(), firstPersonControllerInput.Jump, false);
@@ -114,8 +115,11 @@ public class FirstPersonController : MonoBehaviour
         }).AddTo(this);
 
     }
-    
-    
+
+    private void changeSpeed(float speedMultiplier)
+    {
+        walkingSpeed *= speedMultiplier;
+    }
 
     public struct MoveInputData
     {
