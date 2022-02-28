@@ -25,7 +25,6 @@ public class BossHealthbar : MonoBehaviour
     private void Start()
     {
         m_Healthbar = GetComponent<Image>();
-        EnemyAI.getHealth().Subscribe(i => SetHealth(i));
     }
 
     //If Boss died, lerp its health to 0
@@ -68,7 +67,7 @@ public class BossHealthbar : MonoBehaviour
     public void Instantiate()
     {
         instantiated = true;
-        Show();
         EnemyAI.getHealth().Subscribe(i => SetHealth(i));
+        Show();
     }
 }

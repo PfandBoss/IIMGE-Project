@@ -34,7 +34,7 @@ public class EnemySpawner : MonoBehaviour
             var pos = EnemyAI.RandomNavSphere(transform.position, 100, -1);
             currentEnemy = Instantiate(enemies[0],pos,new Quaternion());
             compassBar.target = currentEnemy.transform;
-            hologramPath.SetActive(false);
+            hologramPath.gameObject.SetActive(false);
             hologramPath.target = currentEnemy.transform;
             enemies.RemoveAt(0);
             return;
@@ -43,7 +43,7 @@ public class EnemySpawner : MonoBehaviour
         {
             currentEnemy = Instantiate(bossObject, bossSpawnPoint.position, new Quaternion());
             compassBar.target = currentEnemy.transform;
-            hologramPath.SetActive(true);
+            hologramPath.gameObject.SetActive(true);
             hologramPath.target = currentEnemy.transform;
             bossHealthbar.EnemyAI = currentEnemy.GetComponent<EnemyAI>();
             bossHealthbar.Instantiate();
