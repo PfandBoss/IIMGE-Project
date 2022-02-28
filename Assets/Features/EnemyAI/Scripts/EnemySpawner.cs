@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -51,7 +52,9 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
         
-        //Win Screen here
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+        SceneManager.LoadScene("Win Screen");
     }
 
     public void DisableHolo()
