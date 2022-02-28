@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
@@ -11,6 +12,7 @@ public class PauseMenu : MonoBehaviour
     public static bool gameIsPaused = false;
     public GameObject pauseMenuUI;
     public GameObject _player;
+    public GameObject pauseFirstBtn;
 
     private CharacterController rb;
     private Quaternion currRot;
@@ -60,8 +62,8 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        // Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.visible = false;
         pauseMenuUI.SetActive(false);
         rb.enabled = true;
         gameIsPaused = false;
@@ -72,6 +74,9 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         pauseMenuUI.SetActive(true);
+        
+        EventSystem.current.SetSelectedGameObject(pauseFirstBtn);
+        
         rb.enabled = false;
         gameIsPaused = true;
     }
