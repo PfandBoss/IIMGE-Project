@@ -1,16 +1,19 @@
 using System.Collections;
 using UnityEngine;
+using UniRx;
 
 public class EnemyAI : MonoBehaviour
 {
     public Transform[] waypoints;
     private int _currentWaypointIndex;
+    public HealthBar HealthBar;
 
     [SerializeField]private  float SightRange ;
     [SerializeField]private  float AttackRange;
     private bool isAttacking;
     [SerializeField]
-    private int health;
+    private ReactiveProperty<int> health;
+    
    
 
     //NavMesh Stuff
@@ -86,10 +89,16 @@ public class EnemyAI : MonoBehaviour
 
     public void ApplyDamage(int dmg)
     {
-        health -= dmg;
-        if (health <= 0)
+        health.Value -= dmg;
+        if (health.Value <= 0)
         {
             Destroy(gameObject);
+            Destroy(HealthBar.gameObject);
         }
+    }
+
+    public ReactiveProperty<int> getHealth()
+    {
+        return health;
     }
 }
