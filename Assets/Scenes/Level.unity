@@ -2438,14 +2438,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 228861034}
     - target: {fileID: 1368649739857779304, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
-      propertyPath: SightRange
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1368649739857779304, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
-      propertyPath: AttackRange
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1368649739857779304, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 436214844}
