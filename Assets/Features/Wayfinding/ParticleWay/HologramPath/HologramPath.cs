@@ -8,7 +8,7 @@ public class HologramPath : MonoBehaviour
 {
     [Header("Agents Configuration")]
     [SerializeField] private Transform player;
-    [SerializeField] private Transform target;
+    [SerializeField] public Transform target;
     
     [SerializeField] private ParticleSystem _trail;
 

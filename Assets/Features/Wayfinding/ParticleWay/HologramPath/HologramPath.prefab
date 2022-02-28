@@ -47,10 +47,10 @@ MonoBehaviour:
   player: {fileID: 0}
   target: {fileID: 0}
   _trail: {fileID: 1679816255529392929, guid: 49d4d67fbd0a4e64594db8536437ee2d, type: 3}
-  moveSpeed: 5
+  moveSpeed: 4
   distanceFromPlayer: 1
-  maxDistanceFromPlayer: 8
-  distanceFromGround: 0.3
+  maxDistanceFromPlayer: 16
+  distanceFromGround: 1
 --- !u!195 &6852676263265631585
 NavMeshAgent:
   m_ObjectHideFlags: 0

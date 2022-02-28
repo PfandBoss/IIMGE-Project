@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UniRx;
+using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -25,13 +26,18 @@ public class EnemyAI : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.Find("FirstPersonPlayer");
         _agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         _playerStats = player.GetComponent<PlayerStats>();
     }
 
     private void Update()
     {
-        if (isAttacking) return;
+        if (isAttacking)
+        {
+            transform.LookAt(player.transform.position);
+            return;
+        }
         var distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         if (distanceToPlayer <= SightRange)
         {
@@ -53,18 +59,39 @@ public class EnemyAI : MonoBehaviour
 
     private void Patrol()
     {
+        /*
         var wp = waypoints[_currentWaypointIndex];
         if (Vector3.Distance(transform.position, wp.position) < 1f)
         {
             _currentWaypointIndex = (_currentWaypointIndex + 1) % waypoints.Length;
-        }
+        }    
         else
         {
             var position = wp.position;
             _agent.destination = position;
             transform.LookAt(position);
         }
-        
+        */
+
+        if (Vector3.Distance(transform.position, _agent.destination) > 1f)
+            return;
+
+        var pos = RandomNavSphere(transform.position, 20f, -1);
+        _agent.destination = pos;
+        transform.LookAt(pos);
+    }
+
+    public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
+    {
+        Vector3 randDirection = Random.insideUnitSphere * dist;
+
+        randDirection += origin;
+
+        NavMeshHit navHit;
+
+        NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
+
+        return navHit.position;
     }
 
     private void RunAtPlayer()
@@ -78,10 +105,16 @@ public class EnemyAI : MonoBehaviour
     {
         isAttacking = true;
         _agent.isStopped = true;
-        yield return new WaitForSeconds(1f);
+        if (gameObject.tag == "Boss")
+            yield return new WaitForSeconds(3f);
+        else
+            yield return new WaitForSeconds(0.25f);
         if (Vector3.Distance(transform.position, player.transform.position) <= AttackRange)
         {
-            _fighterController.AIPunch();
+            if(gameObject.tag != "Boss")
+                _fighterController.AIPunch();
+            else
+                _fighterController.AICombo();
         }
         isAttacking = false;
         _agent.isStopped = false;
@@ -92,6 +125,7 @@ public class EnemyAI : MonoBehaviour
         health.Value -= dmg;
         if (health.Value <= 0)
         {
+            player.SendMessage("SpawnNextEnemy", SendMessageOptions.DontRequireReceiver);
             Destroy(gameObject);
             Destroy(HealthBar.gameObject);
         }

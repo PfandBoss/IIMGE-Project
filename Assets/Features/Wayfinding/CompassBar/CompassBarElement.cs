@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public class CompassBarElement : MonoBehaviour
 {
     [SerializeField] private Transform player;
-    [SerializeField] private Transform target;
+    [SerializeField] public Transform target;
     [SerializeField] private bool useFixDirection = false;
     [SerializeField] private Vector3 fixDirection;
     [SerializeField] private Image CompassBarImage;
