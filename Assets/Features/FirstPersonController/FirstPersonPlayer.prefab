@@ -317,6 +317,7 @@ GameObject:
   - component: {fileID: 228861040}
   - component: {fileID: 228861039}
   - component: {fileID: 228861043}
+  - component: {fileID: 228861044}
   m_Layer: 7
   m_Name: FirstPersonPlayer
   m_TagString: Player
@@ -564,6 +565,28 @@ MonoBehaviour:
   - {fileID: 884538460285071756, guid: 7874267da07bb534894d8edfe1b4ae80, type: 3}
   - {fileID: 6706633567671885246, guid: dcb96de1afa4ecd4098367a56e100f16, type: 3}
   Radius: 35
+--- !u!114 &228861044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4374804948076272335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba4a0285db9ff3d4592c71c64271ee74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies:
+  - {fileID: 1368649739857779317, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
+  - {fileID: 1368649739857779317, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
+  - {fileID: 1368649739857779317, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
+  - {fileID: 1368649739857779317, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
+  - {fileID: 1368649739857779317, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
+  bossObject: {fileID: 1368649739857779317, guid: 09f8b17b9fea7a240a78f8cffc3f068a, type: 3}
+  bossSpawnPoint: {fileID: 0}
+  compassBar: {fileID: 0}
+  hologramPath: {fileID: 0}
 --- !u!1 &5353004102293326348
 GameObject:
   m_ObjectHideFlags: 0

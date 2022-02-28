@@ -14,7 +14,11 @@ public class FighterController : MonoBehaviour
     [SerializeField] private FirstPersonControllerInput firstPersonControllerInput;
     [SerializeField] private FightingStats fightingStats;
     [SerializeField] private PlayerStats _playerStats;
-    
+
+    [Space(10)]
+    [SerializeField] private AudioSource source;
+    [SerializeField] private AudioClip punch;
+    [SerializeField] private AudioClip woosh;
  
     [System.Serializable]
     private class Hand
@@ -25,7 +29,7 @@ public class FighterController : MonoBehaviour
         public GameObject initialPos;
         public GameObject gotoPos;
     }
-    
+    [Space(10)]
     [SerializeField] private Hand rightHand;
     [SerializeField] private Hand leftHand;
 
@@ -146,6 +150,8 @@ public class FighterController : MonoBehaviour
         RaycastHit raycastHit;   
         if(Physics.Raycast(transform.position, transform.forward * 2.5f, out raycastHit, 4f))
         {
+            source.PlayOneShot(punch);
+
             float dmgMul = 1;
             if (gameObject.layer == LayerMask.NameToLayer("Player"))
             {
@@ -157,6 +163,10 @@ public class FighterController : MonoBehaviour
                 .SendMessage("ApplyDamage", 
                     fightingStats.baseDamage * comboHit * dmgMul, 
                     SendMessageOptions.DontRequireReceiver);
+        }
+        else
+        {
+            source.PlayOneShot(woosh);
         }
 
         //Debug.DrawLine(transform.position, transform.TransformDirection(Vector3.forward), Color.red, 2);
@@ -184,9 +194,12 @@ public class FighterController : MonoBehaviour
 
     public void AICombo()
     {
-        for (int i = 0; i < 5; i++)
+        if (comboCooldown > 0)
+            return;
+        for (int i = 0; i < 15; i++)
         {
-            ComboQ.Enqueue(AttackType.Left);
+            ComboQ.Enqueue((AttackType)Random.Range(0,2));
         }
+        comboCooldown += 3;
     }
 }
