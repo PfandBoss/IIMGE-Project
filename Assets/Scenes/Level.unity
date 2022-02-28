@@ -5180,6 +5180,10 @@ PrefabInstance:
       value: FirstPersonPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 5067334488601082174, guid: f6af6b8647f7e274f8f5f015a1d0fd9d, type: 3}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 228861040}
+    - target: {fileID: 5067334488601082174, guid: f6af6b8647f7e274f8f5f015a1d0fd9d, type: 3}
       propertyPath: _pauseMenu
       value: 
       objectReference: {fileID: 1532486011}
