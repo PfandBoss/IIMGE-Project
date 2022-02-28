@@ -174,7 +174,7 @@ public partial class @FirstPersonInputAction : IInputActionCollection2, IDisposa
                     ""id"": ""4cf2cbdc-31cd-4be7-8c38-18c498bc55fd"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""ScaleVector2(x=75,y=75)"",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Look"",
                     ""isComposite"": false,
