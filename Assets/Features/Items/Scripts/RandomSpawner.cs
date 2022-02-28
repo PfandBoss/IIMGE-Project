@@ -13,7 +13,7 @@ public class RandomSpawner : MonoBehaviour
     public GameObject[] items = new GameObject[3];
     public float Radius;
     
-    void Awake()
+    void Start()
     {
         //Subscribe to player health Spawn armor depending on health --> pity drop
         Player.GetComponent<PlayerStats>().getHealth()

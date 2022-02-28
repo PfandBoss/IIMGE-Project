@@ -14,7 +14,7 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private Image[] dmgCanvas;
     [SerializeField] private Text dmgMulText;
     [SerializeField] private Text speedMulText;
-    private void Awake()
+    private void Start()
     {
         stats.getArmor().Subscribe(i => ArmorUI(i)).AddTo(this);
         stats.getHealth().Subscribe(i => UpdateUI(i, healthCanvas)).AddTo(this);
